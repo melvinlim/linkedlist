@@ -6,7 +6,8 @@ int main(){
 	int x;
 	for(int i=0;i<10;i++){
 		x=rand()%100;
-		list->insertInt(x);
+//		list->insertInt(x);
+		list->insertIntInOrderAsc(x);
 	}
 	list->printInt();
 	return 0;

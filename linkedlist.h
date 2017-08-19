@@ -40,5 +40,24 @@ public:
 		}
 		printf("\n");
 	}
+	void insertIntInOrderAsc(int item){
+		int *x=new int;
+		*x=item;
+		NODE *tmpPtr;
+		NODE *ptr=root;
+		if(root->next){
+			while((ptr->next)&&( *((int *)ptr->next->item) < item)){
+				ptr=ptr->next;
+			}
+			tmpPtr=ptr->next;
+			ptr->next=new NODE;
+			ptr->next->item=x;
+			ptr->next->next=tmpPtr;
+		}else{
+			ptr->next=new NODE;
+			ptr->next->item=x;
+			ptr->next->next=0;
+		}
+	}
 };
 #endif
