@@ -2,6 +2,7 @@
 #define _LINKEDLIST_H
 #include<stdlib.h>
 #include<stdio.h>
+#include"complex.h"
 #define NODE struct Node
 NODE{
 	NODE *next;
@@ -27,10 +28,25 @@ public:
 		ptr->next->item=item;
 		ptr->next->next=0;
 	}
+	void apply(void (*f)(void *)){
+		NODE *ptr=root;
+		while(ptr->next){
+			ptr=ptr->next;
+			f(ptr->item);
+		}
+	}
 	void insertInt(int item){
 		int *x=new int;
 		*x=item;
 		insert(x);
+	}
+	void printComplex(){
+		NODE *ptr=root;
+		while(ptr->next){
+			ptr=ptr->next;
+			((Complex *)ptr->item)->print();
+		}
+		printf("\n");
 	}
 	void printInt(){
 		NODE *ptr=root;
