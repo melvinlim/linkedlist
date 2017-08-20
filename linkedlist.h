@@ -5,6 +5,7 @@
 #include"complex.h"
 #include<assert.h>
 #define NODE struct Node
+#define NEW(x) (x *)malloc(sizeof(x))
 NODE{
 	NODE *next;
 	void *item;
@@ -15,7 +16,7 @@ private:
 	int size;
 public:
 	List(){
-		root=new NODE;
+		root=NEW(NODE);
 		root->next=0;
 		root->item=0;
 		size=0;
@@ -25,14 +26,12 @@ public:
 		NODE *tmp;
 		while(ptr->next){
 			tmp=ptr->next;
-//			delete ptr->item;
 			free(ptr->item);
-			delete ptr;
+			free(ptr);
 			ptr=tmp;
 		}
 		free(ptr->item);
-		//delete ptr->item;
-		delete ptr;
+		free(ptr);
 	}
 	int &operator[](int n){
 		if(n>=size){
@@ -49,7 +48,7 @@ public:
 		while(ptr->next){
 			ptr=ptr->next;
 		}
-		ptr->next=new NODE;
+		ptr->next=NEW(NODE);
 		ptr->next->item=item;
 		ptr->next->next=0;
 		++size;
@@ -62,7 +61,7 @@ public:
 		}
 	}
 	void insertInt(int item){
-		int *x=new int;
+		int *x=NEW(int);
 		*x=item;
 		insert(x);
 	}
@@ -83,7 +82,7 @@ public:
 		printf("\n");
 	}
 	void insertIntInOrderAsc(int item){
-		int *x=new int;
+		int *x=NEW(int);
 		*x=item;
 		NODE *tmpPtr;
 		NODE *ptr=root;
@@ -92,11 +91,11 @@ public:
 				ptr=ptr->next;
 			}
 			tmpPtr=ptr->next;
-			ptr->next=new NODE;
+			ptr->next=NEW(NODE);
 			ptr->next->item=x;
 			ptr->next->next=tmpPtr;
 		}else{
-			ptr->next=new NODE;
+			ptr->next=NEW(NODE);
 			ptr->next->item=x;
 			ptr->next->next=0;
 		}

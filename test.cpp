@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<assert.h>
 #include"complex.h"
-#define TRIALS 10000000
+#define TRIALS 1
 void printComplex(void *c){
 	Complex *x=(Complex *)c;
 	x->print();
