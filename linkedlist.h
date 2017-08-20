@@ -3,6 +3,7 @@
 #include<stdlib.h>
 #include<stdio.h>
 #include"complex.h"
+#include<assert.h>
 #define NODE struct Node
 NODE{
 	NODE *next;
@@ -20,12 +21,18 @@ public:
 		size=0;
 	}
 	~List(){
+		NODE *ptr=root;
+		NODE *tmp;
+		while(ptr->next){
+			tmp=ptr->next;
+			delete ptr->item;
+			delete ptr;
+			ptr=tmp;
+		}
 	}
 	int &operator[](int n){
 		if(n>=size){
-			int *x=new int;
-			*x=-1;
-			return *x;
+			assert(0);
 		}
 		NODE *ptr=root;
 		for(int i=0;i<=n;i++){

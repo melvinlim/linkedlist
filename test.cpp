@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include<assert.h>
 #include"complex.h"
+#define TRIALS 10000000
 void printComplex(void *c){
 	Complex *x=(Complex *)c;
 	x->print();
@@ -34,7 +35,6 @@ void testInt(){
 	for(int i=1;i<10;i++){
 		assert((*list)[i-1]<=(*list)[i]);
 	}
-	printf("\n");
 	list->printInt();
 	int *loc;
 	for(int i=0;i<100;i++){
@@ -46,7 +46,9 @@ void testInt(){
 }
 int main(){
 	srand(1234);
-	testComplex();
-	testInt();
+	for(int t=0;t<TRIALS;t++){
+		testComplex();
+		testInt();
+	}
 	return 0;
 }
