@@ -25,10 +25,14 @@ public:
 		NODE *tmp;
 		while(ptr->next){
 			tmp=ptr->next;
-			delete ptr->item;
+//			delete ptr->item;
+			free(ptr->item);
 			delete ptr;
 			ptr=tmp;
 		}
+		free(ptr->item);
+		//delete ptr->item;
+		delete ptr;
 	}
 	int &operator[](int n){
 		if(n>=size){

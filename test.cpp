@@ -35,6 +35,10 @@ void testInt(){
 	for(int i=1;i<10;i++){
 		assert((*list)[i-1]<=(*list)[i]);
 	}
+	for(int i=0;i<10;i++){
+		printf("%d ",(*list)[i]);
+	}
+	printf("\n");
 	list->printInt();
 	int *loc;
 	for(int i=0;i<100;i++){
