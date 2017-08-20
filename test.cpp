@@ -1,5 +1,6 @@
 #include"linkedlist.h"
 #include<stdlib.h>
+#include<assert.h>
 #include"complex.h"
 void printComplex(void *c){
 	Complex *x=(Complex *)c;
@@ -30,11 +31,15 @@ void testInt(){
 //		list->insertInt(x);
 		list->insertIntInOrderAsc(x);
 	}
+	for(int i=1;i<10;i++){
+		assert((*list)[i-1]<=(*list)[i]);
+	}
+	printf("\n");
 	list->printInt();
 	int *loc;
 	for(int i=0;i<100;i++){
-		if(loc=list->findInt(i)){
-			printf("found %d at %x\n",i,loc);
+		if((loc=list->findInt(i))){
+			printf("found %d at %lx\n",i,(unsigned long)loc);
 		}
 	}
 	delete list;
