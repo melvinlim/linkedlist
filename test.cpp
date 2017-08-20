@@ -5,18 +5,11 @@ void printComplex(void *c){
 	Complex *x=(Complex *)c;
 	x->print();
 }
-int main(){
-	srand(1234);
-	List *list=new List();
-	int x;
-	float a,b;
+void testComplex(){
 	Complex *c;
+	float a,b;
+	List *list=new List();
 	for(int i=0;i<10;i++){
-/*
-		x=rand()%100;
-//		list->insertInt(x);
-		list->insertIntInOrderAsc(x);
-*/
 		a=rand()%100/100.0;
 		b=rand()%100/100.0;
 		c=new Complex(a,b);
@@ -27,6 +20,28 @@ int main(){
 	list->printComplex();
 	list->apply(printComplex);
 	printf("\n");
-//	list->printInt();
+	delete list;
+}
+void testInt(){
+	int x;
+	List *list=new List();
+	for(int i=0;i<10;i++){
+		x=rand()%100;
+//		list->insertInt(x);
+		list->insertIntInOrderAsc(x);
+	}
+	list->printInt();
+	int *loc;
+	for(int i=0;i<100;i++){
+		if(loc=list->findInt(i)){
+			printf("found %d at %x\n",i,loc);
+		}
+	}
+	delete list;
+}
+int main(){
+	srand(1234);
+	testComplex();
+	testInt();
 	return 0;
 }

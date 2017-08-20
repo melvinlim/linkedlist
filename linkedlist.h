@@ -75,5 +75,15 @@ public:
 			ptr->next->next=0;
 		}
 	}
+	int *findInt(int item){
+		NODE *ptr=root;
+		while(ptr->next){
+			ptr=ptr->next;
+			if(*((int *)ptr->item)==item){
+				return (int *)ptr->item;
+			}
+		}
+		return 0;
+	}
 };
 #endif
