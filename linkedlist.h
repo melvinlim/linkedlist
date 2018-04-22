@@ -43,6 +43,11 @@ public:
 		}
 		delete ptr;
 	}
+	T *top(){
+		if(root->next)
+			return root->next->item;
+		return 0;
+	}
 	//T &operator[](int n){
 	T *atIndex(int n){
 		if(n>=size){

@@ -36,6 +36,7 @@ void testInt(){
 	list3->remove(list2);
 	printf("3: ");
 	print(list3);
+	printf("%d \n",*list3->top());
 	for(int i=0;i<10;i++){
 		print(list1);
 		s=list1->atIndex(0);
