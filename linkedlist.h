@@ -88,6 +88,14 @@ public:
 		size--;
 		return ret;
 	}
+	void remove(List<T> *items){
+		Node<T> *ptr=items->root;
+		Node<T> *ret;
+		while(ptr->next){
+			remove(ptr->next->item);
+			ptr=ptr->next;
+		}
+	}
 	Node<T> *remove(T *item){
 		Node<T> *ptr=root;
 		Node<T> *ret;
