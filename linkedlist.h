@@ -1,6 +1,6 @@
 #ifndef _LINKEDLIST_H
 #define _LINKEDLIST_H
-#include<assert.h>
+#include<stdio.h>
 template<typename T>
 class Node{
 public:
@@ -38,9 +38,11 @@ public:
 		}
 		delete ptr;
 	}
-	T &operator[](int n){
+	//T &operator[](int n){
+	T *atIndex(int n){
 		if(n>=size){
-			assert(0);
+			printf("atIndex tried to access invalid index\n");
+			return 0;
 		}
 		Node<T> *ptr=root;
 		for(int i=0;i<=n;i++){
@@ -83,6 +85,7 @@ public:
 		if(size==0)	return 0;
 		Node<T> *ret=root->next;
 		root->next=root->next->next;
+		size--;
 		return ret;
 	}
 };
