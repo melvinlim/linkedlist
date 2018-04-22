@@ -95,7 +95,6 @@ public:
 	}
 	void remove(List<T> *items){
 		Node<T> *ptr=items->root;
-		Node<T> *ret;
 		while(ptr->next){
 			remove(ptr->next->item);
 			ptr=ptr->next;
@@ -119,7 +118,6 @@ public:
 		size=list->size;
 		Node<T> *ptr=list->root;
 		Node<T> *sPtr=root;
-		T *item;
 		while(ptr->next){
 			ptr=ptr->next;
 			sPtr->next=new Node<T>(ptr->item);
