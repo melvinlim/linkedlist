@@ -1,57 +1,25 @@
 #include"linkedlist.h"
-#include<stdlib.h>
-#include<assert.h>
-#include"complex.h"
-#define TRIALS 1
-void printComplex(void *c){
-	Complex *x=(Complex *)c;
-	x->print();
-}
-void testComplex(){
-	Complex *c;
-	float a,b;
-	List *list=new List();
-	for(int i=0;i<10;i++){
-		a=rand()%100/100.0;
-		b=rand()%100/100.0;
-		c=new Complex(a,b);
-		c->print();
-		list->insert(c);
-	}
-	printf("\n");
-	list->printComplex();
-	list->apply(printComplex);
-	printf("\n");
-	delete list;
+#include<time.h>
+#include<stdio.h>
+#define TRIALS 100000000000
+void printInt(int *x){
+	printf("%d ",*x);
 }
 void testInt(){
-	int x;
-	List *list=new List();
+	int *x;
+	List<int> *list=new List<int>();
 	for(int i=0;i<10;i++){
-		x=rand()%100;
-//		list->insertInt(x);
-		list->insertIntInOrderAsc(x);
+		x=new int;
+		*x=rand()%100;
+		list->insert(x);
 	}
-	for(int i=1;i<10;i++){
-		assert((*list)[i-1]<=(*list)[i]);
-	}
-	for(int i=0;i<10;i++){
-		printf("%d ",(*list)[i]);
-	}
-	printf("\n");
-	list->printInt();
-	int *loc;
-	for(int i=0;i<100;i++){
-		if((loc=list->findInt(i))){
-			printf("found %d at %lx\n",i,(unsigned long)loc);
-		}
-	}
+	list->apply(printInt);
+	//list->print();
 	delete list;
 }
 int main(){
-	srand(1234);
+	srand(time(0));
 	for(int t=0;t<TRIALS;t++){
-		testComplex();
 		testInt();
 	}
 	return 0;

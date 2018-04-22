@@ -1,112 +1,74 @@
 #ifndef _LINKEDLIST_H
 #define _LINKEDLIST_H
-#include<stdlib.h>
-#include<stdio.h>
-#include"complex.h"
 #include<assert.h>
-#define NODE struct Node
-#define NEW(x) (x *)malloc(sizeof(x))
-NODE{
-	NODE *next;
-	void *item;
+template<typename T>
+class Node{
+public:
+	Node *next;
+	T *item;
+	Node()	{
+		next=0;
+		item=0;
+	};
+	Node(T *item){
+		this->item=item;
+		this->next=0;
+	}
+	~Node(){
+		delete item;
+	}
 };
+template<typename T>
 class List{
 private:
-	NODE *root;
+	Node<T> *root;
 	int size;
 public:
 	List(){
-		root=NEW(NODE);
-		root->next=0;
-		root->item=0;
+		root=new Node<T>();
 		size=0;
 	}
 	~List(){
-		NODE *ptr=root;
-		NODE *tmp;
+		Node<T> *ptr=root;
+		Node<T> *tmp;
 		while(ptr->next){
 			tmp=ptr->next;
-			free(ptr->item);
-			free(ptr);
+			delete ptr;
 			ptr=tmp;
 		}
-		free(ptr->item);
-		free(ptr);
+		delete ptr;
 	}
-	int &operator[](int n){
+	T &operator[](int n){
 		if(n>=size){
 			assert(0);
 		}
-		NODE *ptr=root;
+		Node<T> *ptr=root;
 		for(int i=0;i<=n;i++){
 			ptr=ptr->next;
 		}
-		return *(int *)ptr->item;
+		return ptr->item;
 	}
-	void insert(void *item){
-		NODE *ptr=root;
+	void insert(T *item){
+		Node<T> *ptr=root;
 		while(ptr->next){
 			ptr=ptr->next;
 		}
-		ptr->next=NEW(NODE);
-		ptr->next->item=item;
-		ptr->next->next=0;
+		ptr->next=new Node<T>(item);
 		++size;
 	}
-	void apply(void (*f)(void *)){
-		NODE *ptr=root;
+	void apply(void (*f)(T *)){
+		Node<T> *ptr=root;
 		while(ptr->next){
 			ptr=ptr->next;
 			f(ptr->item);
 		}
 	}
-	void insertInt(int item){
-		int *x=NEW(int);
-		*x=item;
-		insert(x);
-	}
-	void printComplex(){
-		NODE *ptr=root;
+	T *find(T *item){
+		Node<T> *ptr=root;
 		while(ptr->next){
 			ptr=ptr->next;
-			((Complex *)ptr->item)->print();
-		}
-		printf("\n");
-	}
-	void printInt(){
-		NODE *ptr=root;
-		while(ptr->next){
-			ptr=ptr->next;
-			printf("%d ",*((int *)ptr->item));
-		}
-		printf("\n");
-	}
-	void insertIntInOrderAsc(int item){
-		int *x=NEW(int);
-		*x=item;
-		NODE *tmpPtr;
-		NODE *ptr=root;
-		if(root->next){
-			while((ptr->next)&&( *((int *)ptr->next->item) < item)){
-				ptr=ptr->next;
-			}
-			tmpPtr=ptr->next;
-			ptr->next=NEW(NODE);
-			ptr->next->item=x;
-			ptr->next->next=tmpPtr;
-		}else{
-			ptr->next=NEW(NODE);
-			ptr->next->item=x;
-			ptr->next->next=0;
-		}
-		++size;
-	}
-	int *findInt(int item){
-		NODE *ptr=root;
-		while(ptr->next){
-			ptr=ptr->next;
-			if(*((int *)ptr->item)==item){
-				return (int *)ptr->item;
+			if((ptr->item)==item){
+				return ptr->item;
 			}
 		}
 		return 0;
