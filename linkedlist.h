@@ -88,7 +88,7 @@ public:
 		size--;
 		return ret;
 	}
-	Node<T> *remove(Node<T> *item){
+	Node<T> *remove(T *item){
 		Node<T> *ptr=root;
 		Node<T> *ret;
 		while(ptr->next){
@@ -111,7 +111,6 @@ public:
 			item=new T(*(ptr->item));
 			sPtr->next=new Node<T>(item);
 			sPtr=sPtr->next;
-			size++;
 		}
 	}
 };

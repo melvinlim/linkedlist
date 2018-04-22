@@ -21,6 +21,10 @@ void testInt(){
 	}
 	list2->copy(list1);
 	print(list2);
+	s=list2->atIndex(rand()%10);
+	list2->remove(s);
+	assert(list2->find(s)==0);
+	print(list2);
 	for(int i=0;i<10;i++){
 		print(list1);
 		s=list1->atIndex(0);
