@@ -14,6 +14,7 @@ void testInt(){
 	int *x,*t,*s;
 	List<int> *list1=new List<int>();
 	List<int> *list2=new List<int>();
+	List<int> *list3;
 	for(int i=0;i<10;i++){
 		x=new int;
 		*x=rand()%100;
@@ -21,10 +22,20 @@ void testInt(){
 	}
 	list2->copy(list1);
 	print(list2);
-	s=list2->atIndex(rand()%10);
-	list2->remove(s);
-	assert(list2->find(s)==0);
-	print(list2);
+	list3=new List<int>(list2);
+	print(list3);
+	int j=10;
+	for(int i=0;i<5;i++){
+		s=list2->atIndex(rand()%j--);
+		list2->remove(s);
+		assert(list2->find(s)==0);
+		print(list2);
+	}
+	printf("3: ");
+	print(list3);
+	list3->remove(list2);
+	printf("3: ");
+	print(list3);
 	for(int i=0;i<10;i++){
 		print(list1);
 		s=list1->atIndex(0);

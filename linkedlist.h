@@ -24,6 +24,11 @@ private:
 	Node<T> *root;
 	int size;
 public:
+	List(List<T> *l){
+		root=new Node<T>();
+		size=0;
+		copy(l);
+	}
 	List(){
 		root=new Node<T>();
 		size=0;
@@ -103,6 +108,7 @@ public:
 			if((ptr->next->item)==item){
 				ret=ptr->next;
 				ptr->next=ptr->next->next;
+				size--;
 				return ret;
 			}
 			ptr=ptr->next;
@@ -110,6 +116,17 @@ public:
 		return 0;
 	}
 	void copy(List<T> *list){
+		size=list->size;
+		Node<T> *ptr=list->root;
+		Node<T> *sPtr=root;
+		T *item;
+		while(ptr->next){
+			ptr=ptr->next;
+			sPtr->next=new Node<T>(ptr->item);
+			sPtr=sPtr->next;
+		}
+	}
+	void deepcopy(List<T> *list){
 		size=list->size;
 		Node<T> *ptr=list->root;
 		Node<T> *sPtr=root;
