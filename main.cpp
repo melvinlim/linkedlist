@@ -12,21 +12,24 @@ void print(List<int> *list){
 }
 void testInt(){
 	int *x,*t,*s;
-	List<int> *list=new List<int>();
+	List<int> *list1=new List<int>();
+	List<int> *list2=new List<int>();
 	for(int i=0;i<10;i++){
 		x=new int;
 		*x=rand()%100;
-		list->insert(x);
+		list1->insert(x);
 	}
+	list2->copy(list1);
+	print(list2);
 	for(int i=0;i<10;i++){
-		print(list);
-		s=list->atIndex(0);
-		t=list->atIndex(1);
-		list->pop();
-		assert(t==list->atIndex(0));
+		print(list1);
+		s=list1->atIndex(0);
+		t=list1->atIndex(1);
+		list1->pop();
+		assert(t==list1->atIndex(0));
 	}
-	list->pop();
-	delete list;
+	list1->pop();
+	delete list1;
 }
 int main(){
 	srand(time(0));

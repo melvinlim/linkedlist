@@ -88,5 +88,31 @@ public:
 		size--;
 		return ret;
 	}
+	Node<T> *remove(Node<T> *item){
+		Node<T> *ptr=root;
+		Node<T> *ret;
+		while(ptr->next){
+			if((ptr->next->item)==item){
+				ret=ptr->next;
+				ptr->next=ptr->next->next;
+				return ret;
+			}
+			ptr=ptr->next;
+		}
+		return 0;
+	}
+	void copy(List<T> *list){
+		size=list->size;
+		Node<T> *ptr=list->root;
+		Node<T> *sPtr=root;
+		T *item;
+		while(ptr->next){
+			ptr=ptr->next;
+			item=new T(*(ptr->item));
+			sPtr->next=new Node<T>(item);
+			sPtr=sPtr->next;
+			size++;
+		}
+	}
 };
 #endif
