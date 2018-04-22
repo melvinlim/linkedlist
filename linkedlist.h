@@ -49,6 +49,12 @@ public:
 		return ptr->item;
 	}
 	void insert(T *item){
+		Node<T> *tmp=root->next;
+		root->next=new Node<T>(item);
+		root->next->next=tmp;
+		++size;
+	}
+	void insertAtEnd(T *item){
 		Node<T> *ptr=root;
 		while(ptr->next){
 			ptr=ptr->next;
@@ -72,6 +78,12 @@ public:
 			}
 		}
 		return 0;
+	}
+	Node<T> *pop(){
+		if(size==0)	return 0;
+		Node<T> *ret=root->next;
+		root->next=root->next->next;
+		return ret;
 	}
 };
 #endif
