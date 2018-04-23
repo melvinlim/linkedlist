@@ -5,17 +5,17 @@ template<typename T>
 class Node{
 public:
 	Node *next;
-	T *item;
+	T item;
 	Node()	{
 		next=0;
 		item=0;
 	};
-	Node(T *item){
+	Node(T item){
 		this->item=item;
 		this->next=0;
 	}
 	~Node(){
-		delete item;
+		//delete item;
 	}
 };
 template<typename T>
@@ -43,13 +43,13 @@ public:
 		}
 		delete ptr;
 	}
-	T *top(){
+	T top(){
 		if(root->next)
 			return root->next->item;
 		return 0;
 	}
 	//T &operator[](int n){
-	T *atIndex(int n){
+	T atIndex(int n){
 		if(n>=size){
 			printf("atIndex tried to access invalid index\n");
 			return 0;
@@ -60,13 +60,13 @@ public:
 		}
 		return ptr->item;
 	}
-	void insert(T *item){
+	void insert(T item){
 		Node<T> *tmp=root->next;
 		root->next=new Node<T>(item);
 		root->next->next=tmp;
 		++size;
 	}
-	void insertAtEnd(T *item){
+	void insertAtEnd(T item){
 		Node<T> *ptr=root;
 		while(ptr->next){
 			ptr=ptr->next;
@@ -74,19 +74,19 @@ public:
 		ptr->next=new Node<T>(item);
 		++size;
 	}
-	void apply(void (*f)(T *)){
+	void apply(void (*f)(T)){
 		Node<T> *ptr=root;
 		while(ptr->next){
 			ptr=ptr->next;
 			f(ptr->item);
 		}
 	}
-	T *find(T *item){
+	Node<T> *find(T item){
 		Node<T> *ptr=root;
 		while(ptr->next){
 			ptr=ptr->next;
 			if((ptr->item)==item){
-				return ptr->item;
+				return ptr;
 			}
 		}
 		return 0;
@@ -105,7 +105,7 @@ public:
 			ptr=ptr->next;
 		}
 	}
-	Node<T> *remove(T *item){
+	Node<T> *remove(T item){
 		Node<T> *ptr=root;
 		Node<T> *ret;
 		while(ptr->next){
